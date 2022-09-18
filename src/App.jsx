@@ -19,7 +19,7 @@ class App extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = e => {
+  handlerSubmit = e => {
     e.preventDefault();
     let curName = e.currentTarget.elements.name.value;
     let curNumber = e.currentTarget.elements.number.value;
@@ -28,6 +28,18 @@ class App extends React.Component {
       name: curName,
       number: curNumber,
     };
+
+    const res = this.state.contacts.some(
+      el =>
+        el.name.toLowerCase() ===
+        e.currentTarget.elements.name.value.toLowerCase()
+    );
+    if (res) {
+      alert(`${e.currentTarget.elements.name.value} is already in contacts`);
+      e.currentTarget.elements.name.value = '';
+      e.currentTarget.elements.number.value = '';
+      return;
+    }
 
     this.setState(prev => ({
       contacts: [...prev.contacts, dataContacts],
@@ -55,7 +67,7 @@ class App extends React.Component {
 
   filterChange = e => {
     let input = e.currentTarget.value;
-    console.log(input);
+
     this.setState({ filter: input });
   };
   render() {
@@ -64,7 +76,7 @@ class App extends React.Component {
         <h1>Phonebook</h1>
         <ContactForm
           handlerInputChange={this.handlerInputChange}
-          handleSubmit={this.handleSubmit}
+          handlerSubmit={this.handlerSubmit}
         />
         <h2>Contacts</h2>
         <Filter filterChange={this.filterChange} />

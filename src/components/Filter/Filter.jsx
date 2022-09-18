@@ -5,7 +5,7 @@ const Filter = ({ filterChange }) => {
     <>
       <Title title="Find contacts by name" />
       <label>
-        <input type="text" name="" id="" onChange={e => filterChange(e)} />
+        <input type="text" onChange={e => filterChange(e)} />
       </label>
     </>
   );
