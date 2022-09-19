@@ -21,20 +21,19 @@ class App extends React.Component {
 
   handlerSubmit = e => {
     e.preventDefault();
-    let curName = e.currentTarget.elements.name.value;
-    let curNumber = e.currentTarget.elements.number.value;
+    const name = e.currentTarget.elements.name.value;
+    const number = e.currentTarget.elements.number.value;
     const dataContacts = {
       id: nanoid(),
-      name: curName,
-      number: curNumber,
+      name,
+      number,
     };
-
-    const res = this.state.contacts.some(
+    const isInContacts = this.state.contacts.some(
       el =>
         el.name.toLowerCase() ===
         e.currentTarget.elements.name.value.toLowerCase()
     );
-    if (res) {
+    if (isInContacts) {
       alert(`${e.currentTarget.elements.name.value} is already in contacts`);
       e.currentTarget.elements.name.value = '';
       e.currentTarget.elements.number.value = '';
@@ -55,7 +54,7 @@ class App extends React.Component {
     }));
   };
 
-  showFilterInput = () => {
+  showFilteredInput = () => {
     if (this.state.filter === '') {
       return this.state.contacts;
     } else {
@@ -67,7 +66,6 @@ class App extends React.Component {
 
   filterChange = e => {
     let input = e.currentTarget.value;
-
     this.setState({ filter: input });
   };
   render() {
@@ -81,7 +79,7 @@ class App extends React.Component {
         <h2>Contacts</h2>
         <Filter filterChange={this.filterChange} />
         <ContactList
-          contactsList={this.showFilterInput}
+          contactsList={this.showFilteredInput}
           removeContact={this.removeContact}
         />
       </div>

@@ -1,5 +1,5 @@
 import Title from 'components/Title/Title';
-
+import PropTypes from 'prop-types';
 const Filter = ({ filterChange }) => {
   return (
     <>
@@ -10,5 +10,7 @@ const Filter = ({ filterChange }) => {
     </>
   );
 };
-
+Filter.propTypes = {
+  filterChange: PropTypes.func,
+};
 export default Filter;
